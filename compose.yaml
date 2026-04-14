@@ -3,10 +3,21 @@ services:
     build:
       context: .
     container_name: gov-clone-app
+    environment:
+      CI_ENVIRONMENT: development
+      CMS_ADMIN_NAME: BMEB Admin
+      CMS_ADMIN_EMAIL: admin@bmeb.local
+      CMS_ADMIN_PASSWORD: admin123456
     ports:
       - "8080:80"
     volumes:
       - ./writable:/var/www/html/writable
     command: >
-      sh -lc "chown -R www-data:www-data /var/www/html/writable && apache2-foreground"
+      sh -lc "mkdir -p /var/www/html/writable/database
+      && touch /var/www/html/writable/database/app.db
+      && php spark migrate
+      && php spark db:seed App\\\\Database\\\\Seeds\\\\AdminUserSeeder
+      && php spark db:seed App\\\\Database\\\\Seeds\\\\MirrorPageSeeder
+      && chown -R www-data:www-data /var/www/html/writable
+      && apache2-foreground"
     restart: unless-stopped

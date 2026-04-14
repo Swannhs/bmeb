@@ -4,11 +4,13 @@ namespace App\Controllers;
 
 use App\Libraries\MirroredDocumentFactory;
 use App\Libraries\NativePageViewLocator;
+use App\Libraries\CmsPageService;
 use Config\Mimes;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
+use Throwable;
 
 /**
  * BaseController provides a convenient place for loading components
@@ -23,8 +25,10 @@ use Psr\Log\LoggerInterface;
  */
 abstract class BaseController extends Controller
 {
+    protected $helpers = ['form', 'url'];
     protected MirroredDocumentFactory $mirroredDocuments;
     protected NativePageViewLocator $nativePageViews;
+    protected CmsPageService $cmsPages;
 
     /**
      * Be sure to declare properties for any property fetch you initialized.
@@ -47,6 +51,7 @@ abstract class BaseController extends Controller
 
         $this->mirroredDocuments = new MirroredDocumentFactory();
         $this->nativePageViews = new NativePageViewLocator();
+        $this->cmsPages = new CmsPageService();
 
         // Preload any models, libraries, etc, here.
         // $this->session = service('session');
@@ -54,6 +59,10 @@ abstract class BaseController extends Controller
 
     protected function renderMirrorFile(string $absolutePath): ResponseInterface
     {
+        if ($page = $this->currentManagedPage()) {
+            return $this->renderMirrorContent((string) $page['html_content']);
+        }
+
         $extension = pathinfo($absolutePath, PATHINFO_EXTENSION);
         $mimeType = $this->detectMimeType($absolutePath, $extension);
 
@@ -87,6 +96,24 @@ abstract class BaseController extends Controller
         return $response
             ->setContentType($contentType)
             ->setBody($content);
+    }
+
+    protected function renderDynamicOr(callable $fallback): ResponseInterface
+    {
+        if ($page = $this->currentManagedPage()) {
+            return $this->renderMirrorContent((string) $page['html_content']);
+        }
+
+        return $fallback();
+    }
+
+    protected function currentManagedPage(): ?array
+    {
+        try {
+            return $this->cmsPages->findPublishedForRequest($this->request);
+        } catch (Throwable) {
+            return null;
+        }
     }
 
     protected function detectMimeType(string $absolutePath, string $extension): string

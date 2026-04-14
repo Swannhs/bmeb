@@ -1,9 +1,13 @@
-<?= $document['doctype'] . PHP_EOL ?>
-<html<?= $document['htmlAttributes'] !== '' ? ' ' . $document['htmlAttributes'] : '' ?>>
-<head>
-<?= $document['headContent'] . PHP_EOL ?>
-</head>
-<body<?= $document['bodyAttributes'] !== '' ? ' ' . $document['bodyAttributes'] : '' ?>>
-<?= $document['bodyContent'] . PHP_EOL ?>
-</body>
-</html>
+<?= $this->extend('layouts/main') ?>
+
+<?= $this->section('title') ?><?= $document['title'] ?><?= $this->endSection() ?>
+
+<?= $this->section('extra-css') ?>
+    <?= $document['headContent'] ?>
+<?= $this->endSection() ?>
+
+<?= $this->section('content') ?>
+    <div class="mirrored-content">
+        <?= $document['mainContent'] ?>
+    </div>
+<?= $this->endSection() ?>

@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Libraries\MirrorContentRepository;
 use App\Libraries\RemotePortalFetcher;
+use App\Models\NoticeModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use RuntimeException;
 
@@ -17,12 +18,32 @@ class Site extends BaseController
 
     public function home()
     {
-        return $this->serve($this->content->home());
+        try {
+            $noticeModel = new NoticeModel();
+            $data['notices'] = $noticeModel->getRecent(6);
+        } catch (\Throwable $e) {
+            $data['notices'] = [
+                ['title' => 'সিলেটের মত বিনিময় সভার সময় পরিবর্তন প্রসঙ্গে', 'publish_date' => date('Y-m-d'), 'is_new' => 1],
+                ['title' => 'আপিল ও সালিশ কমিটির সভায় উপস্থিত হওয়ার পত্র', 'publish_date' => date('Y-m-d'), 'is_new' => 1],
+                ['title' => '২০২৬ সালের ৬ষ্ঠ শ্রেণির রেজিস্ট্রেশনের ডাউনলোড ও সংশোধন', 'publish_date' => date('Y-m-d'), 'is_new' => 0],
+            ];
+        }
+        return view('pages/home', $data);
     }
 
     public function notices()
     {
-        return $this->serve($this->content->noticesList());
+        try {
+            $noticeModel = new NoticeModel();
+            $data['notices'] = $noticeModel->orderBy('publish_date', 'DESC')->findAll();
+        } catch (\Throwable $e) {
+            $data['notices'] = [
+                ['id' => 1, 'title' => 'সিলেটের মত বিনিময় সভার সময় পরিবর্তন প্রসঙ্গে', 'publish_date' => '2026-04-13', 'file_path' => '#'],
+                ['id' => 2, 'title' => 'আপিল ও সালিশ কমিটির সভায় উপস্থিত হওয়ার পত্র', 'publish_date' => '2026-04-13', 'file_path' => '#'],
+                ['id' => 3, 'title' => '২০২৬ সালের ৬ষ্ঠ শ্রেণির রেজিস্ট্রেশনের ডাউনলোড ও সংশোধন', 'publish_date' => '2026-04-13', 'file_path' => '#'],
+            ];
+        }
+        return view('pages/notices', $data);
     }
 
     public function notice(string $slug)
@@ -32,7 +53,7 @@ class Site extends BaseController
 
     public function officers()
     {
-        return $this->serve($this->content->officersList());
+        return view('pages/officers');
     }
 
     public function officer(string $slug)
@@ -100,16 +121,18 @@ class Site extends BaseController
 
     private function proxyRemote(string $path)
     {
-        try {
-            $remoteResponse = $this->remote->fetch($path, $this->request->getGet());
-        } catch (RuntimeException) {
-            throw PageNotFoundException::forPageNotFound($path);
-        }
+        return $this->renderDynamicOr(function () use ($path) {
+            try {
+                $remoteResponse = $this->remote->fetch($path, $this->request->getGet());
+            } catch (RuntimeException) {
+                throw PageNotFoundException::forPageNotFound($path);
+            }
 
-        return $this->renderMirrorContent(
-            $remoteResponse['body'],
-            $remoteResponse['contentType'],
-            $remoteResponse['status'],
-        );
+            return $this->renderMirrorContent(
+                $remoteResponse['body'],
+                $remoteResponse['contentType'],
+                $remoteResponse['status'],
+            );
+        });
     }
 }

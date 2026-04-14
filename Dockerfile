@@ -18,7 +18,7 @@ RUN apt-get update \
         libicu-dev \
         libonig-dev \
         unzip \
-    && docker-php-ext-install intl mbstring \
+    && docker-php-ext-install intl mbstring pdo_sqlite sqlite3 \
     && a2enmod rewrite \
     && rm -rf /var/lib/apt/lists/*
 

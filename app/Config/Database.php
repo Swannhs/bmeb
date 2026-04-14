@@ -29,8 +29,8 @@ class Database extends Config
         'hostname'     => 'localhost',
         'username'     => '',
         'password'     => '',
-        'database'     => '',
-        'DBDriver'     => 'MySQLi',
+        'database'     => ROOTPATH . 'database/app.db',
+        'DBDriver'     => 'SQLite3',
         'DBPrefix'     => '',
         'pConnect'     => false,
         'DBDebug'      => true,
@@ -199,6 +199,28 @@ class Database extends Config
         // we don't overwrite live data on accident.
         if (ENVIRONMENT === 'testing') {
             $this->defaultGroup = 'tests';
+            return;
+        }
+
+        $configuredDatabase = env('database.default.database');
+
+        if ($configuredDatabase === false || $configuredDatabase === null || $configuredDatabase === '') {
+            $this->default = [
+                'database'    => ROOTPATH . 'database/app.db',
+                'DBDriver'    => 'SQLite3',
+                'DBPrefix'    => '',
+                'DBDebug'     => true,
+                'swapPre'     => '',
+                'failover'    => [],
+                'foreignKeys' => true,
+                'busyTimeout' => 1000,
+                'synchronous' => null,
+                'dateFormat'  => [
+                    'date'     => 'Y-m-d',
+                    'datetime' => 'Y-m-d H:i:s',
+                    'time'     => 'H:i:s',
+                ],
+            ];
         }
     }
 }

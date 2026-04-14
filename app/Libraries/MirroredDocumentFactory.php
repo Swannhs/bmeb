@@ -52,12 +52,28 @@ class MirroredDocumentFactory
             $bodyContent = $matches[2];
         }
 
+        // Try to extract only the main content to avoid double headers/footers
+        $mainContent = $bodyContent;
+        if (preg_match('/<div class="body">(.*?)<\/div>/is', $bodyContent, $matches) === 1) {
+             $mainContent = $matches[1];
+        } elseif (preg_match('/<div class="wrapper">(.*?)<\/div>/is', $bodyContent, $matches) === 1) {
+             $mainContent = $matches[1];
+        }
+
+        // Extract Title from headContent
+        $title = 'বাংলাদেশ মাদ্রাসা শিক্ষা বোর্ড';
+        if (preg_match('/<title\b[^>]*>(.*?)<\/title>/is', $headContent, $matches) === 1) {
+            $title = $matches[1];
+        }
+
         return [
             'doctype'        => $doctype,
             'htmlAttributes' => $htmlAttributes,
             'headContent'    => $headContent,
             'bodyAttributes' => $bodyAttributes,
             'bodyContent'    => $bodyContent,
+            'mainContent'    => $mainContent,
+            'title'          => $title,
         ];
     }
 }

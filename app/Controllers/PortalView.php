@@ -15,18 +15,20 @@ class PortalView extends BaseController
 
     public function search(): ResponseInterface
     {
-        try {
-            $remoteResponse = $this->remote->fetch('views/search', $this->request->getGet());
-        } catch (RuntimeException $exception) {
-            return $this->response
-                ->setStatusCode(502)
-                ->setBody('Unable to load search results at the moment.');
-        }
+        return $this->renderDynamicOr(function () {
+            try {
+                $remoteResponse = $this->remote->fetch('views/search', $this->request->getGet());
+            } catch (RuntimeException $exception) {
+                return $this->response
+                    ->setStatusCode(502)
+                    ->setBody('Unable to load search results at the moment.');
+            }
 
-        return $this->renderMirrorContent(
-            $remoteResponse['body'],
-            $remoteResponse['contentType'],
-            $remoteResponse['status'],
-        );
+            return $this->renderMirrorContent(
+                $remoteResponse['body'],
+                $remoteResponse['contentType'],
+                $remoteResponse['status'],
+            );
+        });
     }
 }

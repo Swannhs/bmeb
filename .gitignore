@@ -61,7 +61,8 @@ Vagrantfile
 !/writable/uploads/index.html
 
 /writable/opinions/*
-!/writable/opinions/index.html
+
+/writable/database/*
 
 /writable/debugbar/*
 !/writable/debugbar/index.html
