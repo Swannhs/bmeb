@@ -65,6 +65,8 @@
             <h1>BMEB Admin</h1>
             <a href="/admin" class="<?= current_url(true)->getPath() === 'admin' ? 'active' : '' ?>">Dashboard</a>
             <a href="/admin/pages" class="<?= str_starts_with(current_url(true)->getPath(), 'admin/pages') ? 'active' : '' ?>">Pages</a>
+            <a href="/admin/notices" class="<?= str_starts_with(current_url(true)->getPath(), 'admin/notices') ? 'active' : '' ?>">Notices</a>
+            <a href="/admin/officers" class="<?= str_starts_with(current_url(true)->getPath(), 'admin/officers') ? 'active' : '' ?>">Officers</a>
             <a href="/" target="_blank" rel="noreferrer">Open Website</a>
             <a href="/admin/logout">Logout</a>
         </aside>

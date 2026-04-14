@@ -19,6 +19,20 @@ $routes->group('admin', static function ($routes): void {
     $routes->get('pages/(:num)/edit', 'Admin\PageController::edit/$1', ['filter' => 'adminauth']);
     $routes->post('pages/(:num)', 'Admin\PageController::update/$1', ['filter' => 'adminauth']);
     $routes->post('pages/(:num)/delete', 'Admin\PageController::delete/$1', ['filter' => 'adminauth']);
+
+    $routes->get('notices', 'Admin\NoticeController::index', ['filter' => 'adminauth']);
+    $routes->get('notices/new', 'Admin\NoticeController::new', ['filter' => 'adminauth']);
+    $routes->post('notices', 'Admin\NoticeController::create', ['filter' => 'adminauth']);
+    $routes->get('notices/(:num)/edit', 'Admin\NoticeController::edit/$1', ['filter' => 'adminauth']);
+    $routes->post('notices/(:num)', 'Admin\NoticeController::update/$1', ['filter' => 'adminauth']);
+    $routes->post('notices/(:num)/delete', 'Admin\NoticeController::delete/$1', ['filter' => 'adminauth']);
+
+    $routes->get('officers', 'Admin\OfficerController::index', ['filter' => 'adminauth']);
+    $routes->get('officers/new', 'Admin\OfficerController::new', ['filter' => 'adminauth']);
+    $routes->post('officers', 'Admin\OfficerController::create', ['filter' => 'adminauth']);
+    $routes->get('officers/(:num)/edit', 'Admin\OfficerController::edit/$1', ['filter' => 'adminauth']);
+    $routes->post('officers/(:num)', 'Admin\OfficerController::update/$1', ['filter' => 'adminauth']);
+    $routes->post('officers/(:num)/delete', 'Admin\OfficerController::delete/$1', ['filter' => 'adminauth']);
 });
 $routes->get('views/search', 'PortalView::search');
 $routes->post('ajax/post/opinion-form', 'Ajax::submitOpinion');

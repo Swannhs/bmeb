@@ -16,6 +16,8 @@ class DashboardController extends BaseController
             'totalPages'     => $pages->countAllResults(),
             'publishedPages' => $pages->where('status', 'published')->countAllResults(),
             'draftPages'     => $pages->where('status', 'draft')->countAllResults(),
+            'totalNotices'   => (new \App\Models\NoticeModel())->countAllResults(),
+            'totalOfficers'  => (new \App\Models\OfficerModel())->countAllResults(),
             'totalAdmins'    => (new AdminUserModel())->countAllResults(),
         ]);
     }

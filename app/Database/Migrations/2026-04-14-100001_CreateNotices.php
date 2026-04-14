@@ -30,6 +30,11 @@ class CreateNotices extends Migration
             'publish_date' => [
                 'type' => 'DATE',
             ],
+            'file_path' => [
+                'type'       => 'VARCHAR',
+                'constraint' => '255',
+                'null'       => true,
+            ],
             'is_new' => [
                 'type'       => 'TINYINT',
                 'constraint' => 1,

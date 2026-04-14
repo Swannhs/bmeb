@@ -1,35 +1,41 @@
+# Build phase
 FROM composer:2 AS vendor
-
 WORKDIR /app
-
 COPY composer.json composer.lock ./
-
 RUN composer install \
     --no-interaction \
     --prefer-dist \
     --no-progress \
     --ignore-platform-reqs
 
+# Runtime phase
+FROM php:8.3-fpm-alpine
 
-FROM php:8.3-apache
+# Install system dependencies
+RUN apk add --no-cache \
+    icu-dev \
+    oniguruma-dev \
+    libxml2-dev \
+    libzip-dev \
+    zip \
+    unzip
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-        libicu-dev \
-        libonig-dev \
-        unzip \
-    && docker-php-ext-install intl mbstring pdo_sqlite sqlite3 \
-    && a2enmod rewrite \
-    && rm -rf /var/lib/apt/lists/*
+# Install PHP extensions
+RUN docker-php-ext-install \
+    intl \
+    mbstring \
+    mysqli \
+    pdo_mysql \
+    xml \
+    zip
 
 WORKDIR /var/www/html
 
+# Clean up build artifacts and move the rest
 COPY . /var/www/html
 COPY --from=vendor /app/vendor /var/www/html/vendor
 
-RUN sed -ri 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/*.conf /etc/apache2/apache2.conf \
-    && printf '<Directory /var/www/html/public>\n    AllowOverride All\n    Require all granted\n</Directory>\n\n<IfModule mod_dir.c>\n    DirectorySlash Off\n</IfModule>\n' > /etc/apache2/conf-available/codeigniter.conf \
-    && a2enconf codeigniter \
-    && chown -R www-data:www-data /var/www/html/writable /var/www/html/public
+RUN chown -R www-data:www-data /var/www/html/writable /var/www/html/public
 
-EXPOSE 80
+EXPOSE 9000
+CMD ["php-fpm"]

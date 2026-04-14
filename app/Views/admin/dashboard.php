@@ -9,11 +9,15 @@
     <a class="btn" href="/admin/pages">Manage Pages</a>
 </div>
 
-<div class="grid cols-4">
+<div class="grid cols-4" style="margin-bottom: 16px;">
     <div class="panel stat"><span class="subtle">Total Pages</span><strong><?= esc((string) $totalPages) ?></strong></div>
     <div class="panel stat"><span class="subtle">Published</span><strong><?= esc((string) $publishedPages) ?></strong></div>
     <div class="panel stat"><span class="subtle">Drafts</span><strong><?= esc((string) $draftPages) ?></strong></div>
     <div class="panel stat"><span class="subtle">Admins</span><strong><?= esc((string) $totalAdmins) ?></strong></div>
+</div>
+<div class="grid cols-4">
+    <div class="panel stat"><span class="subtle">Total Notices</span><strong><?= esc((string) $totalNotices ?? 0) ?></strong></div>
+    <div class="panel stat"><span class="subtle">Officers</span><strong><?= esc((string) $totalOfficers ?? 0) ?></strong></div>
 </div>
 
 <div class="panel panel-pad" style="margin-top:20px;">
