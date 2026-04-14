@@ -11,13 +11,15 @@ services:
     ports:
       - "8080:80"
     volumes:
+      - .:/var/www/html
       - ./writable:/var/www/html/writable
     command: >
-      sh -lc "mkdir -p /var/www/html/writable/database
-      && touch /var/www/html/writable/database/app.db
+      sh -lc "mkdir -p /var/www/html/database
+      && touch /var/www/html/database/app.db
       && php spark migrate
+      && php spark db:seed NoticeSeeder
       && php spark db:seed App\\\\Database\\\\Seeds\\\\AdminUserSeeder
       && php spark db:seed App\\\\Database\\\\Seeds\\\\MirrorPageSeeder
-      && chown -R www-data:www-data /var/www/html/writable
+      && chown -R www-data:www-data /var/www/html/database /var/www/html/writable
       && apache2-foreground"
     restart: unless-stopped

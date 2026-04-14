@@ -8,20 +8,17 @@ class CmsPageModel extends Model
 {
     protected $table            = 'cms_pages';
     protected $primaryKey       = 'id';
-    protected $returnType       = 'array';
     protected $useAutoIncrement = true;
-    protected $protectFields    = true;
+    protected $returnType       = 'array';
     protected $allowedFields    = [
-        'route_key',
-        'route_path',
-        'query_string',
-        'section',
-        'slug',
-        'title',
-        'html_content',
-        'source_path',
-        'source_type',
-        'status',
+        'route_key', 'route_path', 'query_string', 'section', 
+        'slug', 'title', 'html_content', 'source_path', 
+        'source_type', 'status'
     ];
-    protected $useTimestamps = true;
+    protected $useTimestamps    = true;
+
+    public function getByRouteKey(string $key)
+    {
+        return $this->where('route_key', $key)->first();
+    }
 }

@@ -48,12 +48,48 @@ class Site extends BaseController
 
     public function notice(string $slug)
     {
+        try {
+            $noticeModel = new NoticeModel();
+            $notice = $noticeModel->where('slug', $slug)->first();
+            if ($notice) {
+                return view('pages/document', [
+                    'title'   => $notice['title'],
+                    'content' => $notice['content'] . '<br><br><a href="' . $notice['file_path'] . '" class="btn btn-primary">ডাউনলোড করুন</a>'
+                ]);
+            }
+        } catch (\Throwable $e) {}
+        
         return $this->serve($this->content->noticeDetail($slug));
     }
 
     public function officers()
     {
-        return view('pages/officers');
+        try {
+            $officerModel = new \App\Models\OfficerModel();
+            $data['officers'] = $officerModel->orderBy('sort_order', 'ASC')->findAll();
+        } catch (\Throwable $e) {
+            $data['officers'] = [
+                [
+                    'name' => 'প্রফেসর মিঞা মোঃ নূরুল হক',
+                    'designation' => 'চেয়ারম্যান',
+                    'office' => 'বাংলাদেশ মাদ্রাসা শিক্ষা বোর্ড',
+                    'email' => 'chairman@bmeb.gov.bd',
+                    'phone_office' => '০২৫৮৬১০২১৬',
+                    'mobile' => '০১৭১৩০০১২৩২',
+                    'photo_url' => 'https://objectstorage.ap-dcc-gazipur-1.oraclecloud15.com/n/axvjbnqprylg/b/V2Ministry/o/office-bmeb/2024/12/9e0ef9ab396b4f7e96b8602de11711c7.jpg'
+                ],
+                [
+                    'name' => 'প্রফেসর ছালেহ আহমাদ',
+                    'designation' => 'রেজিস্ট্রার',
+                    'office' => 'বাংলাদেশ মাদ্রাসা শিক্ষা বোর্ড',
+                    'email' => 'registrar@bmeb.gov.bd',
+                    'phone_office' => '০২৯৬১২৮৫৮',
+                    'mobile' => '০১৩২৪৭২৭৩৬৫',
+                    'photo_url' => 'https://objectstorage.ap-dcc-gazipur-1.oraclecloud15.com/n/axvjbnqprylg/b/V2Ministry/o/office-bmeb/2024/12/5fb070181013449fa7bf026022af9229.jpg'
+                ]
+            ];
+        }
+        return view('pages/officers', $data);
     }
 
     public function officer(string $slug)
@@ -73,7 +109,11 @@ class Site extends BaseController
 
     public function staticPage(string $id)
     {
-        return $this->serve($this->content->staticPage($id));
+        if (str_ends_with($id, '.html')) {
+            return redirect()->to(base_url('p/' . str_replace('.html', '', $id)), 301);
+        }
+        return $this->renderCmsPage("pages/static-pages/$id") 
+            ?? $this->serve($this->content->staticPage($id));
     }
 
     public function filePage(string $id)
@@ -101,9 +141,35 @@ class Site extends BaseController
         return $this->serve($this->content->externalLinkDetail($slug));
     }
 
+    public function cmsPage(string $id)
+    {
+        if (str_ends_with($id, '.html')) {
+            return redirect()->to(base_url('p/' . str_replace('.html', '', $id)), 301);
+        }
+        // Try various route key formats
+        return $this->renderCmsPage("p/$id")
+            ?? $this->renderCmsPage("pages/static-pages/$id")
+            ?? $this->renderCmsPage($id)
+            ?? throw PageNotFoundException::forPageNotFound($id);
+    }
+
     public function mirror(string ...$segments)
     {
         $path = implode('/', array_filter($segments, static fn ($segment) => $segment !== ''));
+        
+        if (str_ends_with($path, '.html')) {
+            $cleanPath = str_replace('.html', '', $path);
+            if (str_contains($cleanPath, 'static-pages/')) {
+                return redirect()->to(base_url('p/' . basename($cleanPath)), 301);
+            }
+            return redirect()->to(base_url($cleanPath), 301);
+        }
+        
+        $path = str_replace('.html', '', $path);
+        
+        // Try DB first
+        $cmsPage = $this->renderCmsPage($path);
+        if ($cmsPage) return $cmsPage;
 
         try {
             return $this->serve(
@@ -112,6 +178,24 @@ class Site extends BaseController
         } catch (PageNotFoundException) {
             return $this->proxyRemote($path);
         }
+    }
+
+    private function renderCmsPage(string $routeKey)
+    {
+        try {
+            $cmsModel = new \App\Models\CmsPageModel();
+            $page = $cmsModel->getByRouteKey($routeKey);
+            if ($page) {
+                return view('pages/document', [
+                    'page' => $page,
+                    'title' => $page['title'],
+                    'content' => $page['html_content']
+                ]);
+            }
+        } catch (\Throwable $e) {
+            // Log or ignore
+        }
+        return null;
     }
 
     private function serve(string $absolutePath)

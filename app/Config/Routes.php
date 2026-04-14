@@ -45,6 +45,8 @@ $routes->group('pages', static function ($routes): void {
     $routes->get('(:segment)/(:segment)', 'Pages::detail/$1/$2');
 });
 
+$routes->get('p/(:segment)', 'Site::cmsPage/$1');
+
 $routes->get('(:segment)', 'Site::mirror/$1');
 $routes->get('(:segment)/(:segment)', 'Site::mirror/$1/$2');
 $routes->get('(:segment)/(:segment)/(:segment)', 'Site::mirror/$1/$2/$3');
