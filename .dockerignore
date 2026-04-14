@@ -1,0 +1,9 @@
+.git
+.idea
+.DS_Store
+node_modules
+writable/cache/*
+writable/session/*
+writable/logs/*
+vendor
+composer.phar

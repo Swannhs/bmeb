@@ -1,0 +1,1071 @@
+@font-face {
+  font-family: 'NotoSansBengali-Regular';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://objectstorage.ap-dcc-gazipur-1.oraclecloud15.com/n/axvjbnqprylg/b/V2Ministry/o/npf-themes/theme_2025/assets/fonts/NotoSansBengali-Regular.ttf) format('truetype');
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-primary);
+}
+
+@media (min-width: 960px) {
+  body {
+    padding: 0 28px;
+    /* background-color:#F3F3F3; */
+    background: url(https://objectstorage.ap-dcc-gazipur-1.oraclecloud15.com/n/axvjbnqprylg/b/V2Ministry/o/npf-themes/theme_2025/assets/images/bg_main_july.gif) repeat-y scroll center top
+      rgba(0, 0, 0, 0);
+  }
+
+  .footer {
+    width: calc(100% + 62px);
+    margin-left: -30px;
+  }
+
+  .header {
+    width: calc(100% + 62px);
+    margin-left: -30px;
+  }
+}
+
+.placeholder-image {
+  background-image: url(https://objectstorage.ap-dcc-gazipur-1.oraclecloud15.com/n/axvjbnqprylg/b/V2Ministry/o/npf-themes/theme_2025/assets/images/placeholder.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-color: #fff8;
+}
+
+.container {
+  margin: auto;
+  max-width: 960px;
+}
+
+@media (max-width: 960px) {
+  .container {
+    /*max-width: 768px;*/
+    max-width: 100%;
+  }
+  .wrapper {
+    max-width: 768px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    /*max-width: 576px;*/
+    max-width: 100%;
+  }
+  .wrapper {
+    max-width: 576px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 576px) {
+  .container {
+    max-width: 100%;
+    /*margin: 0 16px;*/
+  }
+  .wrapper {
+    max-width: 100%;
+    margin: 0 16px;
+  }
+}
+
+.header {
+  min-height: 100px;
+  /*overflow: hidden;*/
+}
+
+.footer {
+  min-height: 100px;
+  overflow: hidden;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  min-height: 200px;
+  padding: var(--spacing-medium) 0;
+}
+
+.wrapper > .body {
+  flex: 1;
+  overflow: hidden;
+}
+
+.wrapper > .left {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 240px;
+  margin-right: 20px;
+  overflow: hidden;
+}
+
+.wrapper > .right {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 240px;
+  margin-left: 20px;
+  overflow: hidden;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/**********************************************************/
+/**********************************************************/
+/**********************************************************/
+
+@media screen and (max-width: 960px) {
+  .wrapper {
+    display: block;
+  }
+
+  .wrapper > .left {
+    margin-right: 0px;
+  }
+
+  .wrapper > .right {
+    margin-left: 0px;
+  }
+}
+
+.header-widget-section {
+  background-color: var(--color-primary-dark);
+  padding: 8px 16px;
+}
+
+/*banner slider image widget*/
+
+.banner-slider-image-widget .slider-text {
+  display: none;
+}
+
+.banner-slider-image-widget .slider-controls {
+  display: none;
+}
+
+.banner-slider-image-widget .home-carousel {
+  height: 220px;
+  transition: opacity 2000ms ease-in-out;
+}
+
+.banner-slider-image-widget .office-subtitle {
+  /*display: none;*/
+  font-size: var(--text-medium);
+  line-height: 1.5;
+  display: inline-block;
+  text-shadow:
+    -1px -1px 10px #333,
+    1px -1px 10px #333,
+    -1px 1px 10px #333,
+    1px 1px 10px #333;
+}
+
+.banner-slider-image-widget .office-title {
+  /*font-size: var(--text-medium);*/
+  font-size: calc(1.2 * var(--text-medium));
+  line-height: 1.5;
+  display: inline-block;
+  text-shadow:
+    -1px -1px 10px #333,
+    1px -1px 10px #333,
+    -1px 1px 10px #333,
+    1px 1px 10px #333;
+}
+
+@media (min-width: 576px) {
+  .banner-slider-image-widget .office-title {
+    font-size: calc(1.5 * var(--text-large));
+  }
+  .banner-slider-image-widget .office-subtitle {
+    font-size: calc(1.5 * var(--text-medium));
+  }
+}
+
+.banner-slider-image-widget .images {
+  transition:
+    opacity 2000ms ease-in-out,
+    visibility 2000ms ease-in-out;
+}
+
+.banner-slider-image-widget .slider-overlay {
+  top: 0;
+  background: linear-gradient(
+    90deg,
+    #3c3939c0 27.88%,
+    rgba(217, 217, 217, 0.1) 100%
+  );
+}
+
+.banner-slider-image-widget .slider-left {
+  gap: var(--spacing-large);
+}
+
+/*.banner-slider-image-widget .home-carousel {}*/
+
+/* .header-widget-section { */
+/*height: 36px;*/
+/* border-bottom: 4px solid #8bc643; */
+/* } */
+
+.header-widget-section .header-title {
+  font-size: 13px;
+  margin-right: var(--spacing-large);
+  /*display: none;*/
+}
+
+/*@media (min-width: 960px) {*/
+/*    .header-widget-section .header-title  {*/
+
+/*        display: inline-block;*/
+/*    }*/
+/*}*/
+
+@media (min-width: 960px) {
+}
+
+.header-widget-section .header-left-section {
+  margin-left: 0;
+}
+
+/*office find widget */
+.office-findv2-widget .office-group {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-evenly;
+  gap: 3px;
+}
+
+@media (min-width: 960px) {
+  .office-findv2-widget .office-group {
+    flex-wrap: nowrap;
+  }
+}
+
+.office-findv2-widget .office-group select {
+  width: 120px;
+  background-color: #fff2;
+  color: var(--color-dark-text);
+  /*padding: 4px 8px;*/
+  /*height: auto;*/
+}
+.office-findv2-widget .office-group select ~ button {
+  /*padding: 4px 8px;*/
+  /*height: auto;*/
+}
+
+.office-findv2-widget .office-group select option {
+  color: var(--color-dark-bg);
+}
+
+@media (min-width: 576px) {
+  .office-findv2-widget .office-group select {
+    width: 100px;
+  }
+}
+
+.office-group select {
+  font-family: 'Kalpurush', sans-serif;
+  color: #444;
+  line-height: 22px;
+  font-size: 14px;
+}
+
+.office-group select option {
+  font-family: inherit;
+}
+
+.office-findv2-widget .office-group button {
+  cursor: pointer;
+  font-size: 12px;
+  color: #ffffff !important;
+  font-weight: bold;
+  font-family: inherit;
+  border-radius: 4px;
+  border: none;
+  padding: 4px 16px;
+  background: var(--color-secondary-dark);
+}
+
+.office-findv2-widget.header-dropdown select ~ div,
+.office-findv2-widget.header-dropdown select ~ button,
+.office-findv2-widget.header-dropdown select ~ select {
+  margin-left: 0;
+}
+
+.office-findv2-widget .dynamic-dropdowns {
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+}
+
+.dynamic-dropdowns:empty {
+  display: none;
+}
+
+@media (min-width: 960px) {
+  .office-findv2-widget .dynamic-dropdowns {
+    flex-direction: row;
+  }
+}
+
+/*global search widget*/
+
+.global-search-widget .input-search {
+  border-radius: 28px;
+  padding: 4px;
+  padding-left: 20px;
+  padding-right: 40px;
+  width: 110px;
+  /*border: 1px solid transparent;*/
+}
+
+.global-search-widget .input-search:focus {
+  /*border: 1px solid #dc2626;*/
+  box-shadow: 0 0 0 2px #dc2626;
+}
+
+.global-search-widget .btn-search {
+  cursor: pointer;
+  padding: 2px 20px;
+  font-size: 0px;
+  background-image: url(https://objectstorage.ap-dcc-gazipur-1.oraclecloud15.com/n/axvjbnqprylg/b/V2Ministry/o/site-assets/images/magnifying-glass.svg);
+  background-size: 40%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  border-radius: 28px;
+  /*background-color: var(--color-normal-bg);*/
+  background-color: transparent;
+  margin-left: -40px;
+  margin-right: 20px;
+  /*border: 1px solid transparent;*/
+  height: auto;
+}
+
+.language-switcher-widget .btn-lang-change::before {
+  content: '';
+  background: url(https://objectstorage.ap-dcc-gazipur-1.oraclecloud15.com/n/axvjbnqprylg/b/V2Ministry/o/site-assets/images/globe.png) center center
+    no-repeat;
+  background-size: contain;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  transform: translateY(-1px);
+}
+
+.language-switcher-widget .btn-lang-change {
+  font-family: inherit;
+  background-color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+}
+
+/*notice*/
+
+.notice-card-widget {
+  background: -webkit-linear-gradient(top, #ffffff 0%, #ebebeb 100%);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.notice-card-widget .notice-title {
+  margin: 0;
+  font-size: 21px;
+  margin-bottom: var(--spacing-small);
+}
+
+.notice-card-widget .notice-icon {
+  width: calc(4 * var(--spacing-medium)) !important;
+  height: calc(4 * var(--spacing-medium)) !important;
+}
+
+.notice-card-widget .notice-text {
+  font-size: 14px;
+  color: #000;
+}
+
+.notice-card-widget .notice-card {
+  margin: 0 var(--spacing-large) 0 0 !important;
+  padding: 10px 0 5px 70px;
+}
+
+.notice-card-widget .notice-unordered-list {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.notice-card-widget .all-btn > a {
+  background-image: linear-gradient(to bottom, #666, #a6a6a6) !important;
+  text-decoration: none;
+  font-size: 14px;
+  color: var(--color-primary-text);
+  font-family: inherit;
+  padding: 0 6px !important;
+}
+
+.notice-card-widget .notice-content-list {
+  padding: 0 !important;
+  font-size: 14px !important;
+  font-weight: 400;
+  gap: var(--spacing-small);
+}
+
+.notice-card-widget .notice-content-icon {
+  width: 10px;
+  height: 10px;
+}
+
+@media (max-width: 767px) {
+  .notice-card-widget .notice-icon {
+    display: none;
+  }
+
+  .notice-card-widget .notice-card {
+    padding: 16px 10px 0 10px !important;
+  }
+
+  .notice-card-widget .notice-title {
+    font-size: 14px;
+  }
+
+  /*    news*/
+}
+
+.news-card-widget {
+  background: -webkit-linear-gradient(top, #ffffff 0%, #ebebeb 100%);
+  background-image: none;
+  background-color: #fef2f2;
+  border: none;
+}
+
+.news-card-widget .news-card-widget-news-title {
+  color: var(--color-primary-dark);
+}
+
+.news-card-widget .all-btn > a,
+.notice-news-card-widget .news-card .news-card-widget .all-btn > a {
+  font-family: inherit;
+  padding: calc(var(--spacing-small) / 2) calc(var(--spacing-medium));
+  border-radius: calc(var(--spacing-small) / 2);
+  color: var(--color-primary-text);
+  background-image: linear-gradient(
+    to right,
+    var(--color-primary-bg),
+    var(--color-primary-dark)
+  );
+  font-size: var(--typography-a-font-size);
+  text-decoration: none;
+}
+
+.news-card-widget .news-card-widget-ticker a {
+  margin: 0;
+}
+
+/*service box*/
+.service-box-stack-widget-header {
+  display: none;
+}
+
+.service-box-widget .service-box-bullet {
+  width: 10px;
+  height: 10px;
+  background: #676f7e;
+  border-radius: 50%;
+}
+
+.service-box-stack-widget {
+  margin: 0;
+}
+
+.service-box-widget .service-box-list {
+  padding-left: var(--spacing-small);
+}
+
+.service-box-widget .service-box-list-link {
+  color: var(--color-normal-text);
+}
+.service-box-widget .service-box-list-item:hover .service-box-list-link {
+  color: var(--color-primary-bg);
+  text-decoration: underline;
+}
+.service-box-widget .service-box-list-item:hover .service-box-bullet {
+  background-color: var(--color-primary-bg);
+}
+.notice-link:hover .notice-text:first-of-type {
+  color: var(--color-primary-bg);
+  text-decoration: underline;
+}
+
+.gov-initiatives-widget .gov-initiatives-link {
+  color: var(--color-normal-text);
+}
+
+.baera-events-widget .baera-events-link {
+  color: var(--color-normal-text);
+}
+
+.service-box-widget .service-box-title {
+  font-weight: 400;
+  margin: 0;
+  width: inherit;
+  position: absolute;
+  top: 32px;
+  left: calc(100% - 76%);
+  padding-right: var(--spacing-medium);
+}
+
+.service-box-widget {
+  box-shadow: 0px 1px 3px 0px #cdcdcd;
+  border-radius: var(--radius-medium);
+  border: none;
+  background: #ffffff;
+  position: relative;
+  overflow: hidden;
+  padding-right: var(--spacing-medium);
+}
+
+.service-box-widget .service-box-list-item {
+  padding: 0;
+  margin-bottom: 5px;
+}
+
+.service-box-widget .service-box-img-container img {
+  width: 35px;
+  height: 32px;
+}
+
+.service-box-widget .service-box-img-container {
+  width: 59px;
+  height: 59px;
+  box-shadow: 0px 1px 2px 0px #0000001a;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.service-box-widget .service-box-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-small);
+}
+
+.service-box-stack-widget .container-col-6 {
+  margin-bottom: var(--spacing-large);
+  padding: var(--spacing-small);
+}
+
+/*event calendar*/
+
+.google-calendar-widget .google-calendar-widget-calendar {
+  display: flex;
+  justify-content: center;
+}
+
+.google-calendar-widget .google-calendar-widget-header {
+  margin: 0;
+}
+
+.google-calendar-widget-calendar iframe {
+  border: 1px solid #777;
+  width: 99%;
+  height: 300px;
+}
+
+/*photo gallery*/
+
+.photo-gallery-widget .photo-gallery-widget-carousel {
+  height: 432px;
+}
+
+.photo-gallery-widget > h3 {
+  margin-left: 2px;
+}
+
+.photo-gallery-widget-btn-block button {
+  cursor: pointer;
+}
+
+/*person card */
+
+.person-card-stack-widget {
+  background: inherit;
+}
+.person-card-widget {
+  border-radius: var(--radius-medium);
+  opacity: 1;
+  background: var(--color-normal-bg);
+  box-shadow: 0px 1px 3px 0px #cdcdcd;
+}
+
+
+.person-card-widget .person-card-image {
+  /*height: 189px;*/
+  object-fit: cover;
+  width: 100%;
+  border-top-left-radius: var(--radius-medium);
+  border-top-right-radius: var(--radius-medium);
+  margin: 0px;
+}
+
+.person-card-widget .person-card-body {
+  flex-direction: column;
+  border-radius: var(--radius-medium);
+  border: 1px solid #e2e4e9;
+}
+
+.person-card-widget .person-card-ls {
+  width: 100%;
+  margin-top: var(--spacing-small);
+  margin-bottom: var(--spacing-large);
+  position: relative;
+}
+
+.person-card-widget .person-card-name {
+  font-weight: 400;
+}
+.person-card-widget .person-card-name,
+.person-card-widget .person-card-name * {
+  text-align: center !important;
+}
+
+/*
+*/
+.person-card-name > *:first-child {
+  font-size: var(--text-large) !important;
+  line-height: 100% !important;
+}
+/*
+*/
+.person-card-name > *:first-child + * {
+  font-size: var(--text-medium) !important;
+  line-height: 100% !important;
+}
+.person-card-name > *:nth-child(n + 3) {
+  display: none;
+}
+
+.person-card-widget .person-card-link {
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.person-card-widget .person-card-org-name {
+  display: inline-block;
+  font-weight: 400;
+  margin: 0;
+  color: var(--color-normal-text);
+  font-size: var(--text-small);
+}
+
+.sidebar-link-widget .sidebar-link-widget-link {
+  background-color: var(--color-primary-dark);
+  color: var(--color-secondary-text);
+  padding: 9px;
+  font-size: var(--text-medium);
+  /*border-radius: 0;*/
+  border-radius: var(--radius-small);
+  font-weight: 600;
+  margin: var(--spacing-small) 0;
+  text-align: start;
+}
+
+.sidebar-link-widget {
+  border: none;
+  box-shadow: none;
+}
+
+.e-service-card-widget ul li:nth-child(n+4),
+.central-service-link-widget ul li:nth-child(n+4),
+.link-card-widget ul li:nth-child(n+4),
+.ext-imp-link-card-widget ul li:nth-child(n+4) {
+  display: none;
+}
+
+/*internal e service*/
+
+.e-service-card-widget {
+  border: 1px solid #e2e4e9;
+  box-shadow: 0px 1px 2px 0px var(--color-normal-bg);
+  background: var(--color-normal-bg);
+  border-radius: 6px;
+  padding: 16px 11px 16px 11px;
+  line-height: 20px;
+}
+
+/*
+.e-service-card-widget .e-service-card-header {
+  background-color: var(--color-normal-bg);
+  color: var(--color-primary-light);
+  margin: 0px;
+  padding: 0px;
+  font-weight: 400;
+}
+*/
+
+.e-service-card-widget .e-service-card-list {
+  border-radius: 4px;
+  border: 1px solid #e2e4e9;
+  opacity: 1;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+
+.e-service-card-widget .e-service-card-list a {
+  padding: 13px 8px;
+  flex: 1;
+}
+
+.e-service-card-widget .e-service-card-list:hover {
+  background-color: var(--color-primary-bg);
+}
+.e-service-card-widget .e-service-card-list:hover div,
+.e-service-card-widget .e-service-card-list:hover a {
+  filter: invert();
+}
+
+.e-service-card-widget .e-service-card-image {
+  background-image: url(https://objectstorage.ap-dcc-gazipur-1.oraclecloud15.com/n/axvjbnqprylg/b/V2Ministry/o/site-assets/images/arrow-right.svg);
+  width: 16px;
+  height: 16px;
+  margin-left: 2px;
+}
+
+.e-service-card-widget .image-links {
+  display: none;
+}
+
+.link-card-image {
+  background-image: url(https://objectstorage.ap-dcc-gazipur-1.oraclecloud15.com/n/axvjbnqprylg/b/V2Ministry/o/site-assets/images/right-tick.png);
+  width: 16px;
+  height: 16px;
+  flex: 0 0 14px;
+}
+
+.innovation-corner-widget .innovation-corner-image {
+  background-image: url(https://objectstorage.ap-dcc-gazipur-1.oraclecloud15.com/n/axvjbnqprylg/b/V2Ministry/o/site-assets/images/right-tick.png);
+  width: 16px;
+  height: 16px;
+  flex: 0 0 14px;
+}
+
+.gov-news-initiatives-widget .gov-news-initiatives-image {
+  background-image: url(https://objectstorage.ap-dcc-gazipur-1.oraclecloud15.com/n/axvjbnqprylg/b/V2Ministry/o/site-assets/images/right-tick.png);
+  width: 16px;
+  height: 16px;
+  flex: 0 0 14px;
+}
+
+.gov-news-initiatives-widget .gov-news-initiatives-list {
+  border-bottom: 1px solid #a0a0a0;
+}
+
+.gov-news-initiatives-widget .gov-news-initiatives-header {
+  border-radius: 0;
+}
+
+.gov-initiatives-widget .gov-initiatives-image {
+  background-image: url(https://objectstorage.ap-dcc-gazipur-1.oraclecloud15.com/n/axvjbnqprylg/b/V2Ministry/o/site-assets/images/right-tick.png);
+  width: 16px;
+  height: 16px;
+  flex: 0 0 14px;
+}
+
+.gov-initiatives-widget .gov-initiatives-list {
+  border-bottom: 1px solid #a0a0a0;
+}
+
+.gov-initiatives-widget .gov-initiatives-header {
+  border-radius: 0;
+}
+
+.baera-events-widget .baera-events-image {
+  background-image: url(https://objectstorage.ap-dcc-gazipur-1.oraclecloud15.com/n/axvjbnqprylg/b/V2Ministry/o/site-assets/images/right-tick.png);
+  width: 16px;
+  height: 16px;
+  flex: 0 0 14px;
+}
+
+.baera-events-widget .baera-events-list {
+  border-bottom: 1px solid #a0a0a0;
+}
+
+.baera-events-widget .baera-events-header {
+  border-radius: 0;
+}
+
+.e-service-card-widget .all-btn > a {
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+  padding: 0;
+  margin: var(--spacing-small) 0;
+}
+
+/*external link*/
+.ext-imp-link-card-widget .link-card-a {
+}
+
+/*border-bottom: 1px solid #a0a0a0;*/
+
+.e-service-card-widget .e-service-card-list-link:hover {
+  text-decoration: none;
+}
+
+/*important link*/
+
+.link-card-widget .link-card-a {
+  color: var(--color-normal-text);
+}
+
+.link-card-widget .all-btn a {
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+}
+
+.link-card-widget .link-card-list {
+  border-bottom: 1px solid #a0a0a0;
+}
+
+.innovation-corner-widget .innovation-corner-list {
+  border-bottom: 1px solid #a0a0a0;
+}
+
+.innovation-corner-widget .all-btn > a {
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+}
+
+.national-anthem-widget .national-anthem-header {
+  border-radius: 0;
+}
+
+.innovation-corner-widget .innovation-corner-header {
+  border-radius: 0;
+}
+
+.branches-widget .all-btn > a {
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+  padding: 0;
+  margin: var(--spacing-small) 0;
+}
+
+.branches-widget .branches-widget-image {
+  background-image: url(https://objectstorage.ap-dcc-gazipur-1.oraclecloud15.com/n/axvjbnqprylg/b/V2Ministry/o/site-assets/images/right-tick.png);
+  width: 16px;
+  height: 16px;
+  flex: 0 0 14px;
+}
+
+.branches-widget-widget .branches-widget-list {
+  border-bottom: 1px solid #a0a0a0;
+}
+
+.hotline-card-widget .hotline-card-header {
+  border-radius: 0;
+}
+
+.hotline-widget .hotline-card-text {
+  border-radius: 0;
+}
+
+.link-card-widget .link-card-header {
+  border-radius: 0;
+}
+
+/*footer widget*/
+
+@media (max-width: 768px) {
+  .footer-widget .footer-body {
+    flex-direction: column;
+  }
+}
+
+.footer-widget .footer-link {
+  font-size: 14px;
+}
+
+.footer-widget .footer-body .text-xs p {
+  font-size: 11px;
+  margin: 0;
+}
+
+.footer-widget .footer-body {
+  padding: 0;
+}
+
+.footer-widget .site-update-block > p {
+  /*color: var(--color-dark-dark);*/
+  /*display: none; !* TODO FIX LATER   *!*/
+}
+
+.publication-card-widget a {
+  color: var(--color-normal-text);
+}
+
+.notice-card-widget .notice-tag {
+  color: #ff0000;
+}
+
+.event-calendar-list-widget .event-list-slider-item .event-calendar-content {
+  /*padding: calc(2 * var(--spacing-large)) 0 0 0;*/
+  padding: calc(1 * var(--spacing-large));
+  padding-top: 0;
+}
+
+.event-calendar-list-widget .event-calendar-content .event-calendar-name {
+  /*margin-left: var(--spacing-large);*/
+}
+
+.event-calendar-list-widget .event-list-slider-item .event-calendar-list-container {
+  padding: calc(1 * var(--spacing-large));
+  padding-top: 0;
+}
+
+.event-calendar-list-widget .event-calendar-list-container .event-calendar-list-box {
+  bottom: var(--spacing-large);
+  /*top: var(--spacing-large);*/
+  left: var(--spacing-large);
+  right: var(--spacing-large);
+  padding: var(--spacing-large); /* calc(2* var(--spacing-large));*/
+}
+
+.event-calendar-list-widget .event-calendar-name {
+  margin-left: 0;
+}
+
+/*footer*/
+
+.footer-block-widget-title {
+  padding: 5px;
+}
+
+.hotline-widget-more-btn-block {
+  display: none;
+}
+
+.block-widget .block-widget-title {
+  border-radius: var(--radius-small);
+}
+
+.widget h1[class],
+.widget h2[class],
+.widget h3[class],
+.widget h4[class],
+.widget h5[class],
+.widget h6[class] {
+  border-radius: var(--radius-small);
+}
+
+.block-widget {
+  background: var(--color-normal-bg);
+  border: 1px solid #e2e4e9;
+  border-radius: 6px;
+  padding: 1px 8px;
+  margin: 0px auto 16px;
+}
+
+
+.block-widget .block-widget-content {
+  margin: var(--spacing-small) 0;
+}
+
+.e-service-card-widget,
+.link-card-widget,
+.innovation-corner-widget,
+.gov-news-initiatives-widget,
+.gov-initiatives-widget,
+.baera-events-widget,
+.branches-widget,
+.gems-link-widget,
+.central-service-link-widget,
+.national-anthem-widget,
+.event-calendar-widget,
+.office-social-links-widget,
+.social-media-widget,
+.study-in-bangladesh-widget,
+.foreign-service-academy-widget ,
+.sidebar-block-widget ,
+.internal-eService-static-image-card-widget,
+.ambassador-widget {
+  background: var(--color-normal-bg);
+  border: 1px solid #e2e4e9;
+  border-radius: 6px;
+  padding: 1px 8px;
+  margin: 0px auto 16px;
+}
+
+.e-service-card-widget .all-btn > a,
+.link-card-widget .all-btn > a,
+.innovation-corner-widget .all-btn > a,
+.gov-news-initiatives-widget .all-btn > a,
+.gov-initiatives-widget .all-btn > a,
+.baera-events-widget .all-btn > a,
+.branches-widget .all-btn > a {
+  padding: 8px 20px;
+  border-radius: 4px;
+  opacity: 1;
+  border: 1px solid #16a249;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  justify-content: center;
+  background: var(--color-normal-bg) !important;
+  margin-bottom: 8px;
+}
+
+.e-service-card-widget .all-btn > a:hover,
+.link-card-widget .all-btn > a:hover,
+.innovation-corner-widget .all-btn > a:hover,
+.gov-news-initiatives-widget .all-btn > a:hover,
+.gov-initiatives-widget .all-btn > a:hover,
+.baera-events-widget .all-btn > a:hover,
+.branches-widget .all-btn > a:hover {
+  background: var(--color-primary-bg) !important;
+  color: var(--color-primary-text) !important;
+}
+
+.e-service-card-widget .all-btn > a::after,
+.link-card-widget .all-btn > a::after,
+.innovation-corner-widget .all-btn > a::after,
+.gov-news-initiatives-widget .all-btn > a::after,
+.gov-initiatives-widget .all-btn > a::after,
+.baera-events-widget .all-btn > a::after,
+.branches-widget .all-btn > a::after {
+  content: url(https://objectstorage.ap-dcc-gazipur-1.oraclecloud15.com/n/axvjbnqprylg/b/V2Ministry/o/site-assets/images/arrow-down.png);
+  display: inline-block;
+  vertical-align: middle;
+  transform: rotate(-90deg) translate(1px, 4px);
+}
+
+.e-service-card-widget .all-btn > a:hover::after,
+.link-card-widget .all-btn > a:hover::after,
+.innovation-corner-widget .all-btn > a:hover::after,
+.gov-news-initiatives-widget .all-btn > a:hover::after,
+.gov-initiatives-widget .all-btn > a:hover::after,
+.baera-events-widget .all-btn > a:hover::after,
+.branches-widget .all-btn > a:hover::after {
+  filter: invert();
+}
