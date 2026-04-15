@@ -7,8 +7,9 @@ services:
       CMS_ADMIN_NAME: BMEB Admin
       CMS_ADMIN_EMAIL: admin@bmeb.local
       CMS_ADMIN_PASSWORD: admin123456
-      database.default.database: /var/www/html/database/app.db
-      database.default.DBDriver: SQLite3
+      database_default_database: /var/www/html/database/app.db
+      database_default_DBDriver: SQLite3
+      app_baseURL: http://54.91.85.139/
     volumes:
       - ./writable:/var/www/html/writable
       - ./database:/var/www/html/database

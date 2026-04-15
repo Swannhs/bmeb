@@ -212,6 +212,7 @@
     <script src="<?= base_url('site-assets/js/index.js') ?>"></script>
     <script src="<?= base_url('widget-assets/js/HeaderWidget.js') ?>"></script>
     <script src="<?= base_url('widget-assets/js/BannerSliderImageWidget.js') ?>"></script>
+    <script src="<?= base_url('widget-assets/js/MenusWidget.js') ?>"></script>
     <script src="<?= base_url('widget-assets/js/MenusExpandableWidget.js') ?>"></script>
     <script src="<?= base_url('assets/js/index.js') ?>"></script>
     

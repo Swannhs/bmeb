@@ -186,10 +186,12 @@ class Site extends BaseController
             $cmsModel = new \App\Models\CmsPageModel();
             $page = $cmsModel->getByRouteKey($routeKey);
             if ($page) {
+                $document = $this->mirroredDocuments->fromHtml((string) $page['html_content']);
+
                 return view('pages/document', [
-                    'page' => $page,
-                    'title' => $page['title'],
-                    'content' => $page['html_content']
+                    'page'    => $page,
+                    'title'   => $page['title'] ?: $document['title'],
+                    'content' => $document['mainContent']
                 ]);
             }
         } catch (\Throwable $e) {

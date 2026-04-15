@@ -1,0 +1,31 @@
+FROM composer:2 AS composer_bin
+
+FROM php:8.3-fpm-alpine
+
+RUN apk add --no-cache \
+    icu-dev \
+    libxml2-dev \
+    libzip-dev \
+    oniguruma-dev \
+    sqlite-dev \
+    unzip \
+    zip
+
+RUN docker-php-source extract \
+    && cp /usr/src/php/ext/sqlite3/config0.m4 /usr/src/php/ext/sqlite3/config.m4 \
+    && docker-php-ext-install \
+    intl \
+    mbstring \
+    pdo_sqlite \
+    sqlite3 \
+    xml \
+    zip \
+    && docker-php-source delete
+
+COPY --from=composer_bin /usr/bin/composer /usr/bin/composer
+
+WORKDIR /var/www/html
+
+EXPOSE 9000
+
+CMD ["php-fpm"]

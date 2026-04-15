@@ -29,6 +29,8 @@ class MirroredDocumentFactory
      */
     public function fromHtml(string $html): array
     {
+        $html = $this->stripEmbeddedMenuWidget($html);
+
         $doctype = '<!DOCTYPE html>';
         $htmlAttributes = '';
         $headContent = '';
@@ -75,5 +77,14 @@ class MirroredDocumentFactory
             'mainContent'    => $mainContent,
             'title'          => $title,
         ];
+    }
+
+    private function stripEmbeddedMenuWidget(string $html): string
+    {
+        return preg_replace(
+            '/<section[^>]*data-widget_name="MenusExpandableWidget"[^>]*class="[^"]*menus-expandable-widget[^"]*"[^>]*>.*?<div class="expand-btn">.*?<\/div>\s*<\/section>/is',
+            '',
+            $html,
+        ) ?? $html;
     }
 }

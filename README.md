@@ -67,3 +67,20 @@ Additionally, make sure that the following extensions are enabled in your PHP:
 - json (enabled by default - don't turn it off)
 - [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
 - [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+
+## Docker Development
+
+Use the dedicated dev stack for local work:
+
+```bash
+docker compose -f compose.dev.yaml up --build
+```
+
+This development config:
+
+- builds from `Dockerfile.dev`
+- mounts the whole project for live code edits
+- serves the app at `http://localhost:8080`
+- uses SQLite with `/var/www/html/database/app.db`
+- runs migrations on startup
+- avoids the destructive notice/officer reseeding used by the current production-style compose file
