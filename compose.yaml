@@ -1,6 +1,6 @@
 services:
   app:
-    image: gov-app-alpine:latest
+    image: swann007/gov-app:latest
     container_name: gov-clone-app
     environment:
       CI_ENVIRONMENT: development

@@ -17,17 +17,21 @@ RUN apk add --no-cache \
     oniguruma-dev \
     libxml2-dev \
     libzip-dev \
+    sqlite-dev \
     zip \
     unzip
 
 # Install PHP extensions
-RUN docker-php-ext-install \
+RUN docker-php-source extract \
+    && cp /usr/src/php/ext/sqlite3/config0.m4 /usr/src/php/ext/sqlite3/config.m4 \
+    && docker-php-ext-install \
     intl \
     mbstring \
-    mysqli \
-    pdo_mysql \
+    pdo_sqlite \
+    sqlite3 \
     xml \
-    zip
+    zip \
+    && docker-php-source delete
 
 WORKDIR /var/www/html
 
