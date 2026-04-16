@@ -16,10 +16,12 @@ class CreateCmsPages extends Migration
                 'auto_increment' => true,
             ],
             'route_key' => [
-                'type'       => 'TEXT',
+                'type'       => 'VARCHAR',
+                'constraint' => 255,
             ],
             'route_path' => [
-                'type'       => 'TEXT',
+                'type'       => 'VARCHAR',
+                'constraint' => 255,
                 'null'       => true,
             ],
             'query_string' => [
@@ -32,8 +34,9 @@ class CreateCmsPages extends Migration
                 'null'       => true,
             ],
             'slug' => [
-                'type' => 'TEXT',
-                'null' => true,
+                'type'       => 'VARCHAR',
+                'constraint' => 255,
+                'null'       => true,
             ],
             'title' => [
                 'type'       => 'VARCHAR',

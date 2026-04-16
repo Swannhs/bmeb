@@ -73,3 +73,10 @@ h1, h2, h3, h4, h5, h6, header, li, main, nav, noscript, ol, p, section, table, 
 img {
   font-size: 0;
 }
+/* Fix for navigation home icon visibility */
+.menu-widget .home-link {
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    background-position: center !important;
+}

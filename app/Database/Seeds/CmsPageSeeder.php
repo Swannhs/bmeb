@@ -33,8 +33,8 @@ class CmsPageSeeder extends Seeder
                 $html = file_get_contents($filePath);
                 $doc = $factory->fromHtml($html);
                 
-                // Construct a route key (e.g. static-pages/691997bf933eb65569ddec81)
-                $routeKey = str_replace('.html', '', $relativePath);
+                // Use ONLY the base filename as the route key for clean /p/ID links
+                $routeKey = basename($relativePath, '.html');
                 
                 $data[] = [
                     'route_key'    => $routeKey,

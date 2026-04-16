@@ -1069,3 +1069,11 @@ body {
 .branches-widget .all-btn > a:hover::after {
   filter: invert();
 }
+
+/* Fix for navigation home icon visibility */
+.menu-widget .home-link {
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    background-position: center !important;
+}

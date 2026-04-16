@@ -27,10 +27,10 @@ class Database extends Config
     public array $default = [
         'DSN'          => '',
         'hostname'     => 'localhost',
-        'username'     => '',
-        'password'     => '',
-        'database'     => ROOTPATH . 'database/app.db',
-        'DBDriver'     => 'SQLite3',
+        'username'     => 'sukhandig_bmeb',
+        'password'     => 'xW_IX.6#fI!1]s^w',
+        'database'     => 'sukhandig_bmeb',
+        'DBDriver'     => 'MySQLi',
         'DBPrefix'     => '',
         'pConnect'     => false,
         'DBDebug'      => true,
@@ -206,15 +206,17 @@ class Database extends Config
 
         if ($configuredDatabase === false || $configuredDatabase === null || $configuredDatabase === '') {
             $this->default = [
-                'database'    => ROOTPATH . 'database/app.db',
-                'DBDriver'    => 'SQLite3',
+                'hostname'    => 'localhost',
+                'username'    => 'sukhandig_bmeb',
+                'password'    => 'xW_IX.6#fI!1]s^w',
+                'database'    => 'sukhandig_bmeb',
+                'DBDriver'    => 'MySQLi',
                 'DBPrefix'    => '',
                 'DBDebug'     => true,
                 'swapPre'     => '',
                 'failover'    => [],
-                'foreignKeys' => true,
-                'busyTimeout' => 1000,
-                'synchronous' => null,
+                'charset'      => 'utf8mb4',
+                'DBCollat'     => 'utf8mb4_general_ci',
                 'dateFormat'  => [
                     'date'     => 'Y-m-d',
                     'datetime' => 'Y-m-d H:i:s',

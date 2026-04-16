@@ -10,10 +10,12 @@ use RuntimeException;
 
 class Site extends BaseController
 {
-    public function __construct(
-        private readonly MirrorContentRepository $content = new MirrorContentRepository(),
-        private readonly RemotePortalFetcher $remote = new RemotePortalFetcher(),
-    ) {
+    private MirrorContentRepository $content;
+    private RemotePortalFetcher $remote;
+
+    public function __construct() {
+        $this->content = new MirrorContentRepository();
+        $this->remote = new RemotePortalFetcher();
     }
 
     public function home()

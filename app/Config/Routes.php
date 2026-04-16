@@ -42,6 +42,29 @@ $routes->get('ajax/(:segment)/(:segment)/(:segment)', 'Ajax::proxy/$1/$2/$3');
 $routes->get('ajax/(:segment)/(:segment)/(:segment)/(:segment)', 'Ajax::proxy/$1/$2/$3/$4');
 $routes->get('ajax/(:segment)/(:segment)/(:segment)/(:segment)/(:segment)', 'Ajax::proxy/$1/$2/$3/$4/$5');
 
+$routes->get('run-migrate', function() {
+    $migrate = \Config\Services::migrations();
+    try {
+        $migrate->latest();
+        return "Migration successful!";
+    } catch (\Exception $e) {
+        return "Migration failed: " . $e->getMessage();
+    }
+});
+
+$routes->get('run-seed', function() {
+    $seeder = \Config\Database::seeder();
+    try {
+        $seeder->call('AdminUserSeeder');
+        $seeder->call('CmsPageSeeder');
+        $seeder->call('NoticeSeeder');
+        $seeder->call('OfficerSeeder');
+        return "Seeding successful! Your database is now populated.";
+    } catch (\Exception $e) {
+        return "Seeding failed: " . $e->getMessage();
+    }
+});
+
 $routes->group('pages', static function ($routes): void {
     $routes->get('notices', 'Site::notices');
     $routes->get('notices/(:segment)', 'Site::notice/$1');
