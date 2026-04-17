@@ -1077,3 +1077,106 @@ body {
     align-items: center !important;
     background-position: center !important;
 }
+
+.custom-marquee {
+    background: #fff;
+    padding: 10px 0;
+    border-bottom: 3px solid var(--color-primary-bg);
+}
+
+.custom-marquee p {
+    margin: 0;
+    white-space: nowrap;
+    display: block;
+}
+
+.service-box-img-container img {
+    max-width: 60px;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Service Box Enhancements */
+.service-box-expandable-stack-widget {
+    margin-top: 20px !important;
+}
+
+.service-box-stack-widget-title {
+    font-size: 20px !important;
+    font-weight: 700 !important;
+    margin-bottom: 20px !important;
+    color: var(--color-primary-dark) !important;
+}
+
+.service-box-widget {
+    padding: 15px !important;
+    background: #fff !important;
+    border: 1px solid #eee !important;
+    height: 100% !important;
+}
+
+.service-box-widget .service-box-title {
+    font-size: 17px !important;
+    font-weight: 700 !important;
+    position: static !important;
+    margin: 0 0 15px 0 !important;
+    padding: 0 !important;
+    color: #333 !important;
+    width: 100% !important;
+}
+
+.service-box-widget .service-box-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+}
+
+.service-box-img-container {
+    flex: 0 0 50px !important;
+}
+
+.service-box-img-container img {
+    width: 100% !important;
+    max-width: 45px !important;
+    height: auto !important;
+}
+
+.service-box-widget .service-box-list {
+    margin: 0 !important;
+    padding: 0 !important;
+    flex: 1 !important;
+}
+
+.service-box-widget .service-box-list-item {
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+    margin-bottom: 6px !important;
+    padding: 0 !important;
+    list-style: none !important;
+}
+
+.service-box-widget .service-box-bullet {
+    width: 8px !important;
+    height: 8px !important;
+    background-color: #555 !important;
+    border-radius: 50% !important;
+    margin-top: 6px !important;
+    flex-shrink: 0 !important;
+    display: block !important;
+    background-image: none !important;
+}
+
+.service-box-widget .service-box-list-link,
+.service-box-widget .service-box-list-item a {
+    font-size: 14px !important;
+    color: #444 !important;
+    text-decoration: none !important;
+    line-height: 1.4 !important;
+}
+
+.service-box-widget .service-box-list-item a:hover {
+    color: var(--color-primary-bg) !important;
+    text-decoration: underline !important;
+}

@@ -25,6 +25,7 @@ function isActive($path, $currentPath)
                 <!-- Home -->
                 <li class="megamenu-link <?= isActive('/', $currentPath) ?>" style="display: flex;">
                     <a class="menu-parent-list-link home-link" href="<?= base_url() ?>" style="color: rgb(255, 69, 0);">
+                        <i class="ph ph-house"></i>
                     </a>
                 </li>
 

@@ -163,6 +163,9 @@
     <link rel="stylesheet" href="<?= base_url('widget-assets/css/MenusExpandableWidget.css') ?>">
     <link rel="stylesheet" href="<?= base_url('widget-assets/css/MenusWidget.css') ?>">
     <link rel="stylesheet" href="<?= base_url('widget-assets/css/NoticeNewsCardWidget.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('widget-assets/css/ServiceBoxWidget.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('widget-assets/css/ServiceBoxStackWidget.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('widget-assets/css/ServiceBoxExpandableStackWidget.css') ?>">
     <link rel="stylesheet" href="<?= base_url('widget-assets/css/FooterWidget.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/index.css') ?>">
 

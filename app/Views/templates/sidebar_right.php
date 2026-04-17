@@ -32,7 +32,7 @@
             <div class="block-widget-content"> 
                 <p style="text-align:center;">
                     <a href="https://bangladesh.gov.bd/site/page/aaebba14-f52a-4a3d-98fd-a3f8b911d3d9" target="_blank">
-                        <img alt="জরুরি হেল্পলাইন নম্বর" src="http://bangladesh.gov.bd/sites/default/files/files/bangladesh.gov.bd/files/a3cbb305_511d_4266_bf35_74cfcfd2be9d/hotline_v.2_bn.png" style="width:100%; max-width: 220px;" />
+                        <img alt="জরুরি হেল্পলাইন নম্বর" src="<?= base_url('site-assets/images/hotline_bn.png') ?>" style="width:100%; max-width: 220px;" />
                     </a>
                 </p> 
             </div> 
