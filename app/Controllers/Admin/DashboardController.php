@@ -19,6 +19,7 @@ class DashboardController extends BaseController
             'totalNotices'   => (new \App\Models\NoticeModel())->countAllResults(),
             'totalOfficers'  => (new \App\Models\OfficerModel())->countAllResults(),
             'totalAdmins'    => (new AdminUserModel())->countAllResults(),
+            'totalSliders'   => (new \App\Models\SliderModel())->countAllResults(),
         ]);
     }
 }

@@ -154,7 +154,7 @@
     <!-- External Assets -->
     <link rel="stylesheet" href="<?= base_url('site-assets/css/phosphor.css') ?>">
     <link rel="stylesheet" href="<?= base_url('site-assets/css/phosphor-fill.css') ?>">
-    <link rel="stylesheet" href="<?= base_url('site-assets/css/index.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('site-assets/css/index.css') ?>?v=1.2">
     <link rel="stylesheet" href="<?= base_url('widget-assets/css/HeaderWidget.css') ?>">
     <link rel="stylesheet" href="<?= base_url('widget-assets/css/OfficeFindThreeWidget.css') ?>">
     <link rel="stylesheet" href="<?= base_url('widget-assets/css/GlobalSearchWidget.css') ?>">
@@ -167,7 +167,7 @@
     <link rel="stylesheet" href="<?= base_url('widget-assets/css/ServiceBoxStackWidget.css') ?>">
     <link rel="stylesheet" href="<?= base_url('widget-assets/css/ServiceBoxExpandableStackWidget.css') ?>">
     <link rel="stylesheet" href="<?= base_url('widget-assets/css/FooterWidget.css') ?>">
-    <link rel="stylesheet" href="<?= base_url('assets/css/index.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/index.css') ?>?v=1.2">
 
     <?= $this->renderSection('extra-css') ?>
 </head>

@@ -68,6 +68,18 @@ class PageController extends BaseController
         ]);
     }
 
+    public function visualBuilder(int $id)
+    {
+        $page = $this->pages->find($id);
+        if ($page === null) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound('Admin page not found');
+        }
+
+        return view('admin/pages/visual_builder', [
+            'page' => $page,
+        ]);
+    }
+
     public function update(int $id)
     {
         return $this->savePage($id);
@@ -89,9 +101,17 @@ class PageController extends BaseController
 
     private function savePage(?int $id = null)
     {
+        $title = trim((string) $this->request->getPost('title'));
+        $slug = trim((string) $this->request->getPost('slug'));
+
+        if ($slug === '' && $title !== '') {
+            $slug = $this->createSlug($title);
+        }
+
         $payload = $this->cms->preparePageData([
             'route_key'    => trim((string) $this->request->getPost('route_key')),
-            'title'        => trim((string) $this->request->getPost('title')),
+            'title'        => $title,
+            'slug'         => $slug,
             'html_content' => (string) $this->request->getPost('html_content'),
             'source_type'  => 'admin',
             'source_path'  => trim((string) $this->request->getPost('source_path')),
@@ -123,5 +143,14 @@ class PageController extends BaseController
         $this->pages->save($payload);
 
         return redirect()->to('/admin/pages')->with('message', 'Page saved.');
+    }
+
+    private function createSlug(string $string)
+    {
+        $title = explode('|', $string)[0];
+        $slug = preg_replace('/\s+/u', '-', trim($title));
+        // Include \p{M} for Bengali vowel signs (Marks)
+        $slug = preg_replace('/[^\p{L}\p{M}\p{N}-]+/u', '', $slug);
+        return trim($slug, '-');
     }
 }

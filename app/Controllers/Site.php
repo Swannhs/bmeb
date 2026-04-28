@@ -21,9 +21,19 @@ class Site extends BaseController
     public function home()
     {
         try {
+            $sectionModel = new \App\Models\HomeSectionModel();
+            $sections = $sectionModel->where('is_active', 1)->orderBy('sort_order', 'ASC')->findAll();
+            $data['sections'] = [];
+            foreach ($sections as $s) {
+                $data['sections'][$s['position']][] = $s;
+                // Keep associative access for specific logic if needed
+                $data['section_data'][$s['section_key']] = $s;
+            }
+
             $noticeModel = new NoticeModel();
             $data['notices'] = $noticeModel->getRecent(6);
         } catch (\Throwable $e) {
+            $data['sections'] = [];
             $data['notices'] = [
                 ['title' => 'সিলেটের মত বিনিময় সভার সময় পরিবর্তন প্রসঙ্গে', 'publish_date' => date('Y-m-d'), 'is_new' => 1],
                 ['title' => 'আপিল ও সালিশ কমিটির সভায় উপস্থিত হওয়ার পত্র', 'publish_date' => date('Y-m-d'), 'is_new' => 1],
@@ -54,9 +64,12 @@ class Site extends BaseController
             $noticeModel = new NoticeModel();
             $notice = $noticeModel->where('slug', $slug)->first();
             if ($notice) {
+                $renderer = new \App\Libraries\EditorJsRenderer();
+                $content = $renderer->render($notice['content']);
+                
                 return view('pages/document', [
                     'title'   => $notice['title'],
-                    'content' => $notice['content'] . '<br><br><a href="' . $notice['file_path'] . '" class="btn btn-primary">ডাউনলোড করুন</a>'
+                    'content' => $content . '<br><br><a href="' . $notice['file_path'] . '" class="btn btn-primary">ডাউনলোড করুন</a>'
                 ]);
             }
         } catch (\Throwable $e) {}
@@ -143,16 +156,21 @@ class Site extends BaseController
         return $this->serve($this->content->externalLinkDetail($slug));
     }
 
-    public function cmsPage(string $id)
+    public function cmsPage(string $identifier)
     {
-        if (str_ends_with($id, '.html')) {
-            return redirect()->to(base_url('p/' . str_replace('.html', '', $id)), 301);
+        if (str_ends_with($identifier, '.html')) {
+            $identifier = str_replace('.html', '', $identifier);
+            return redirect()->to(base_url('p/' . $identifier), 301);
         }
-        // Try various route key formats
-        return $this->renderCmsPage("p/$id")
-            ?? $this->renderCmsPage("pages/static-pages/$id")
-            ?? $this->renderCmsPage($id)
-            ?? throw PageNotFoundException::forPageNotFound($id);
+
+        // Try lookup by slug or route_key
+        $cmsPage = $this->renderCmsPage($identifier);
+        if ($cmsPage) return $cmsPage;
+
+        // Fallback for full paths that might be in the identifier
+        return $this->renderCmsPage("p/$identifier")
+            ?? $this->renderCmsPage("pages/static-pages/$identifier")
+            ?? throw PageNotFoundException::forPageNotFound($identifier);
     }
 
     public function mirror(string ...$segments)
@@ -182,18 +200,26 @@ class Site extends BaseController
         }
     }
 
-    private function renderCmsPage(string $routeKey)
+    private function renderCmsPage(string $identifier)
     {
         try {
             $cmsModel = new \App\Models\CmsPageModel();
-            $page = $cmsModel->getByRouteKey($routeKey);
+            // Try slug first, then route_key
+            $page = $cmsModel->where('slug', $identifier)->orWhere('route_key', $identifier)->first();
+            
             if ($page) {
-                $document = $this->mirroredDocuments->fromHtml((string) $page['html_content']);
+                $content = (string) $page['html_content'];
+                
+                // Check if content is EditorJS JSON
+                if (str_starts_with(trim($content), '{') && str_ends_with(trim($content), '}')) {
+                    $renderer = new \App\Libraries\EditorJsRenderer();
+                    $content = $renderer->render($content);
+                }
 
                 return view('pages/document', [
                     'page'    => $page,
-                    'title'   => $page['title'] ?: $document['title'],
-                    'content' => $document['mainContent']
+                    'title'   => $page['title'],
+                    'content' => $content
                 ]);
             }
         } catch (\Throwable $e) {

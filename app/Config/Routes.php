@@ -16,6 +16,25 @@ $routes->group('admin', static function ($routes): void {
     $routes->get('pages/new', 'Admin\PageController::new', ['filter' => 'adminauth']);
     $routes->post('pages', 'Admin\PageController::create', ['filter' => 'adminauth']);
     $routes->post('pages/import', 'Admin\PageController::import', ['filter' => 'adminauth']);
+    $routes->get('pages/(:num)/builder', 'Admin\PageController::visualBuilder/$1', ['filter' => 'adminauth']);
+
+    $routes->get('menus', 'Admin\MenuController::index', ['filter' => 'adminauth']);
+    $routes->get('menus/new', 'Admin\MenuController::new', ['filter' => 'adminauth']);
+    $routes->post('menus', 'Admin\MenuController::create', ['filter' => 'adminauth']);
+    $routes->post('menus/reorder', 'Admin\MenuController::reorder', ['filter' => 'adminauth']);
+    $routes->get('menus/(:num)/edit', 'Admin\MenuController::edit/$1', ['filter' => 'adminauth']);
+    $routes->post('menus/(:num)', 'Admin\MenuController::update/$1', ['filter' => 'adminauth']);
+    $routes->post('menus/(:num)/delete', 'Admin\MenuController::delete/$1', ['filter' => 'adminauth']);
+
+    $routes->get('home-sections', 'Admin\HomeSectionController::index', ['filter' => 'adminauth']);
+    $routes->post('home-sections/reorder', 'Admin\HomeSectionController::reorder', ['filter' => 'adminauth']);
+    $routes->get('home-sections/(:num)/edit', 'Admin\HomeSectionController::edit/$1', ['filter' => 'adminauth']);
+    $routes->post('home-sections/(:num)', 'Admin\HomeSectionController::update/$1', ['filter' => 'adminauth']);
+    
+    $routes->get('media', 'Admin\MediaController::index', ['filter' => 'adminauth']);
+    $routes->get('media/list', 'Admin\MediaController::list', ['filter' => 'adminauth']);
+    $routes->post('upload-image', 'Admin\MediaController::uploadImage', ['filter' => 'adminauth']);
+
     $routes->get('pages/(:num)/edit', 'Admin\PageController::edit/$1', ['filter' => 'adminauth']);
     $routes->post('pages/(:num)', 'Admin\PageController::update/$1', ['filter' => 'adminauth']);
     $routes->post('pages/(:num)/delete', 'Admin\PageController::delete/$1', ['filter' => 'adminauth']);
@@ -33,6 +52,12 @@ $routes->group('admin', static function ($routes): void {
     $routes->get('officers/(:num)/edit', 'Admin\OfficerController::edit/$1', ['filter' => 'adminauth']);
     $routes->post('officers/(:num)', 'Admin\OfficerController::update/$1', ['filter' => 'adminauth']);
     $routes->post('officers/(:num)/delete', 'Admin\OfficerController::delete/$1', ['filter' => 'adminauth']);
+
+    $routes->get('sliders', 'Admin\SliderController::index', ['filter' => 'adminauth']);
+    $routes->post('sliders/reorder', 'Admin\SliderController::reorder', ['filter' => 'adminauth']);
+    $routes->match(['get', 'post'], 'sliders/create', 'Admin\SliderController::create', ['filter' => 'adminauth']);
+    $routes->match(['get', 'post'], 'sliders/edit/(:num)', 'Admin\SliderController::edit/$1', ['filter' => 'adminauth']);
+    $routes->get('sliders/delete/(:num)', 'Admin\SliderController::delete/$1', ['filter' => 'adminauth']);
 });
 $routes->get('views/search', 'PortalView::search');
 $routes->post('ajax/post/opinion-form', 'Ajax::submitOpinion');
@@ -59,9 +84,23 @@ $routes->get('run-seed', function() {
         $seeder->call('CmsPageSeeder');
         $seeder->call('NoticeSeeder');
         $seeder->call('OfficerSeeder');
+        $seeder->call('MenuSeeder');
+        $seeder->call('HomeSectionSeeder');
         return "Seeding successful! Your database is now populated.";
     } catch (\Exception $e) {
         return "Seeding failed: " . $e->getMessage();
+    }
+});
+
+$routes->get('run-home-seed', function() {
+    $db = \Config\Database::connect();
+    $db->table('home_sections')->emptyTable();
+    $seeder = \Config\Database::seeder();
+    try {
+        $seeder->call('HomeSectionSeeder');
+        return "Home seeding successful!";
+    } catch (\Exception $e) {
+        return "Home seeding failed: " . $e->getMessage();
     }
 });
 

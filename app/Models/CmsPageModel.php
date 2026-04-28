@@ -21,4 +21,9 @@ class CmsPageModel extends Model
     {
         return $this->where('route_key', $key)->first();
     }
+
+    public function getBySlug(string $slug)
+    {
+        return $this->where('slug', $slug)->first();
+    }
 }
